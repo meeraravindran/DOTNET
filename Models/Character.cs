@@ -8,5 +8,6 @@ namespace Webapi.Models
         public int Strength { get; set; } = 90;
         public int Defence { get; set; } = 95;
         public RpgClass Class {get; set;} = RpgClass.Queen;
+        public User User { get; set; }
     }
 }
