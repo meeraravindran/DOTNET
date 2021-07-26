@@ -131,5 +131,42 @@ namespace Webapi.Services.CharacterService
 
         private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
+        public async Task<ServiceResponse<GetCharacterDto>> AddCharacterSkill(AddCharacterSkillDto newCharacterSkill)
+        {
+            //throw new NotImplementedException();
+            var response = new ServiceResponse<GetCharacterDto>();
+            try
+            {
+                var character = _context.Characters
+                .Include(c => c.Weapon)
+                .Include(c => c.Skills)
+                .FirstOrDefaultAsync(c => c.Id == newCharacterSkill.CharacterId
+                && c.User.Id == GetUserId());
+
+                if(character == null)
+                {
+                    response.Success=false;
+                    response.message="CHaracter not found";
+                    return response;
+                }
+                var skill = await _context.Skills.FirstOrDefaultAsync(s => s.Id == newCharacterSkill.SkillId);
+                if(skill ==null)
+                {
+                    response.Success=false;
+                    response.message="CHaracter not found";
+                    return response;
+                }
+                character.Skills.Add(skill);
+                await _context.SaveChangesAsync();
+                response.Data=_mapper.Map<GetCharacterDto>(character);
+                
+            }
+            catch(Exception ex)
+            {
+                response.Success=false;
+                response.message=ex.Message;
+            }
+            return response;
+        }
     }
 }

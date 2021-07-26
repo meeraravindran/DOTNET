@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Webapi.Models
 {
     public class Character
@@ -9,5 +11,7 @@ namespace Webapi.Models
         public int Defence { get; set; } = 95;
         public RpgClass Class {get; set;} = RpgClass.Queen;
         public User User { get; set; }
+        public Weapon Weapon { get; set; }
+        public List<Skill> Skills { get; set; }
     }
 }

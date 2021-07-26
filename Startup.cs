@@ -19,6 +19,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Filters;
 using Microsoft.AspNetCore.Http;
+using System.Data;
+using Microsoft.Data.SqlClient;
+using Webapi.Services.WeaponService;
 
 namespace Webapi
 {
@@ -35,6 +38,8 @@ namespace Webapi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(options => options.UseSqlServer("Server=localhost\\SQLEXPRESS; Database=webapi-db; Trusted_Connection=True;"));
+            // services.AddTransient<IDbConnection>(db => new SqlConnection(
+            //         Configuration.GetSection("ConnectionStrings:DefaultConnection").Value)));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -63,6 +68,8 @@ namespace Webapi
                         };
                     });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IWeaponService, WeaponService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

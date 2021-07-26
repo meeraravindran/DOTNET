@@ -1,5 +1,7 @@
 using AutoMapper;
 using Webapi.Dtos.Character;
+using Webapi.Dtos.Skill;
+using Webapi.Dtos.Weapon;
 using Webapi.Models;
 
 namespace Webapi
@@ -10,6 +12,8 @@ namespace Webapi
         {
             CreateMap<Character, GetCharacterDto>();
             CreateMap<AddCharacterDto, Character>();
+            CreateMap<Weapon, GetWeaponDto>();
+            CreateMap<Skill, GetSkillDto>();
         }
     }
 }

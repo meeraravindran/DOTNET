@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using Webapi.Dtos.Skill;
+using Webapi.Dtos.Weapon;
 using Webapi.Models;
 
 namespace Webapi.Dtos.Character
@@ -9,5 +12,7 @@ namespace Webapi.Dtos.Character
         public int Strength { get; set; } = 90;
         public int Defence { get; set; } = 95;
         public RpgClass Class { get; set; } = RpgClass.Queen;
+        public GetWeaponDto Weapon {get; set;}
+        public List<GetSkillDto> Skills { get; set; }
     }
 }
