@@ -156,7 +156,7 @@ namespace Webapi.Services.CharacterService
                     response.message="CHaracter not found";
                     return response;
                 }
-                character.Skills.Add(skill);
+               // character.Skills.Add(skill);
                 await _context.SaveChangesAsync();
                 response.Data=_mapper.Map<GetCharacterDto>(character);
                 
